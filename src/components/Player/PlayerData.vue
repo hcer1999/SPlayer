@@ -39,6 +39,10 @@
         size="small"
         align="center"
       >
+        <!-- 音质 -->
+        <span class="meta-item">{{
+          statusStore.playUblock || !statusStore.songQuality ? "未知音质" : statusStore.songQuality
+        }}</span>
         <!-- 歌词模式 -->
         <span class="meta-item">{{ lyricMode }}</span>
         <!-- 是否在线 -->

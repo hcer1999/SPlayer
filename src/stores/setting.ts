@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { keywords, regexes } from "@/assets/data/exclude";
+import { SongUnlockServer } from "@/utils/songManager";
 
 export interface SettingState {
   /** 明暗模式 */
@@ -99,6 +100,8 @@ export interface SettingState {
   songVolumeFadeTime: number;
   /** 是否使用解灰 */
   useSongUnlock: boolean;
+  /** 歌曲解锁音源 */
+  songUnlockServer: { key: SongUnlockServer; enabled: boolean }[];
   /** 显示倒计时 */
   countDownShow: boolean;
   /** 显示歌词条 */
@@ -171,6 +174,12 @@ export interface SettingState {
   showDefaultLocalPath: boolean;
   /** 展示当前歌曲歌词状态信息 */
   showPlayMeta: boolean;
+  /** 显示歌曲音质 */
+  showSongQuality: boolean;
+  /** 显示歌曲特权标签 */
+  showSongPrivilegeTag: boolean;
+  /** 显示原唱翻唱标签 */
+  showSongOriginalTag: boolean;
 }
 
 export const useSettingStore = defineStore("setting", {
@@ -201,6 +210,11 @@ export const useSettingStore = defineStore("setting", {
     songVolumeFade: true,
     songVolumeFadeTime: 300,
     useSongUnlock: true,
+    songUnlockServer: [
+      { key: SongUnlockServer.BODIAN, enabled: true },
+      { key: SongUnlockServer.GEQUBAO, enabled: true },
+      { key: SongUnlockServer.NETEASE, enabled: true },
+    ],
     countDownShow: true,
     barLyricShow: true,
     playerType: "cover",
@@ -250,6 +264,9 @@ export const useSettingStore = defineStore("setting", {
     useRealIP: false,
     realIP: "",
     showPlayMeta: false,
+    showSongQuality: true,
+    showSongPrivilegeTag: true,
+    showSongOriginalTag: true,
   }),
   getters: {
     /**
